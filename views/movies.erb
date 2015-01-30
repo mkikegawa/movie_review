@@ -1,31 +1,33 @@
+<%= erb :_nav %>
+
 <div class="row">
   <div class="col-md-offset-1 col-md-10">
     <h1>The list</h1>
   </div>
 </div>
 <div class="row">
-  <div class="col-md-offset-4 col-md-4">
-    <form role="search">
-      <input type="text" name="search" value="<%= @search %>" placeholder="Search">
-      <button type="submit">Submit</button>
-      <button type="reset"
-              onclick="window.location.href='/movies'">Reset</button>
-    </form>
-  </div>
-</div>
-<div class="row">
   <div class="col-md-offset-1 col-md-10">
-    <table class="table table-striped table-hover">
+    <table class="table table-bordered table-striped table-hover">
       <tr >
         <th class="col-md-2 text-center">
           <% if @category == "title" && @sort_order == "desc" %>
-            <%= '<a href="/movies?category=title&sort_order=asc">' %>
+            <%= '<a href="/movies?category=title&sort_order=asc">Title <span class="glyphicon glyphicon-sort-by-alphabet-alt"><span></a>' %>
+          <% elsif @category == "title" && @sort_order == "asc" %> 
+            <%= '<a href="/movies?category=title&sort_order=desc">Title <span class="glyphicon glyphicon-sort-by-alphabet"><span></a>' %>
           <% else %> 
-            <%= '<a href="/movies?category=title&sort_order=desc">' %>
+            <%= '<a href="/movies?category=title&sort_order=desc">Title</a>' %>  
           <% end %>
-              Title</a>
           </th>
-        <th class="col-md-5 text-center">Actors</th>
+        <th class="col-md-4 text-center">Actors</th>
+        <th class="col-md-1 text-center">
+          <% if @category == "earnings" && @sort_order == "desc" %>
+            <%= '<a href="/movies?category=earnings&sort_order=asc">' %>
+          <% else %> 
+            <%= '<a href="/movies?category=earnings&sort_order=desc">' %>
+          <% end %>
+            Earnings</a>
+          </th> 
+        <th class="col-md-3 text-center">Genre</th>
         <th class="col-md-2 text-center">
           <% if @category == "released" && @sort_order == "desc" %>
             <%= '<a href="/movies?category=released&sort_order=asc">' %>
@@ -34,16 +36,19 @@
           <% end %>
             Released</a>
         </th>
-        <th class="col-md-3 text-center">Genre</th>
       </tr>
       <% @library.each do |movie| %>
         <tr>
           <td class="text-left"><a href="movies/<%= movie.id %>"><%= movie.title %></a></td>
           <td class="text-left"><a href="movies/<%= movie.id %>"><%= movie.actors_list %></a></td>
-          <td class="text-center"><a href="movies/<%= movie.id %>"><%= movie.released %></a></td>
+          <td class="text-center"><a href="movies/<%= movie.id %>">$<%= movie.earnings %>M</a></td>
           <td class="text-left"><a href="movies/<%= movie.id %>"><%= movie.genre_list %></a></td>
+          <td class="text-center"><a href="movies/<%= movie.id %>"><%= movie.released %></a></td>
         </tr>
       <% end %>
     </table>
+    <p class="text-right">
+       * Information source -- <a href="http://www.rottentomatoes.com/">Rottentomatos.com</a>
+    </p>
   </div>
 </div>

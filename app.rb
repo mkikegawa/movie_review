@@ -25,3 +25,6 @@ get '/movies/:id' do
   erb :movie
 end
 
+get '/about' do
+  erb :about
+end

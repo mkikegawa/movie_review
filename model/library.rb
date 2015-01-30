@@ -11,7 +11,8 @@ class Library
                 released: Date.new(2015, 1, 16), 
                 genre: ["Drama" , "Action & Adventure"], 
                 id: 1, 
-                trailer: "www.youtube.com/embed/99k3u9ay1gs"
+                trailer: "www.youtube.com/embed/99k3u9ay1gs",
+                earnings: 64.6
                 ),
       Movie.new(
                 title: "The Boy Next Door", 
@@ -20,7 +21,8 @@ class Library
                 released: Date.new(2015, 1, 23), 
                 genre: ["Mystery & Suspense"], 
                 id: 2, 
-                trailer: "www.youtube.com/embed/KWWB11YulPc"
+                trailer: "www.youtube.com/embed/KWWB11YulPc",
+                earnings: 14.9
                 ),
       Movie.new(
                 title: "Paddington", 
@@ -29,7 +31,8 @@ class Library
                 released: Date.new(2015, 1, 16), 
                 genre: ["Comedy", "Kids & Family"], 
                 id: 3, 
-                trailer: "www.youtube.com/embed/CxeBdrGGU8U"
+                trailer: "www.youtube.com/embed/CxeBdrGGU8U",
+                earnings: 12.3
                 ),
       Movie.new(
                 title: "The Wedding Ringer", 
@@ -38,7 +41,8 @@ class Library
                 released: Date.new(2015, 1, 16), 
                 genre: ["Comedy"], 
                 id: 4, 
-                trailer: "www.youtube.com/embed/R3TeI9jPPuA"
+                trailer: "www.youtube.com/embed/R3TeI9jPPuA",
+                earnings: 11.3
                 ),
       Movie.new(
                 title: "Taken 3", 
@@ -47,7 +51,8 @@ class Library
                 released: Date.new(2015, 1, 9), 
                 genre: ["Action & Adventure"], 
                 id: 5,
-                trailer: "www.youtube.com/embed/JuU0M2xBasc"
+                trailer: "www.youtube.com/embed/JuU0M2xBasc",
+                earnings: 7.4
                 ),
       Movie.new(
                 title: "The Imitation Game", 
@@ -56,7 +61,8 @@ class Library
                 released: Date.new(2014, 11, 28), 
                 genre: ["Mystery & Suspense", "Drama"], 
                 id: 6, 
-                trailer: "www.youtube.com/embed/S5CjKEFb-sM"
+                trailer: "www.youtube.com/embed/S5CjKEFb-sM",
+                earnings: 6.9
                 ),
       Movie.new(
                 title: "Strange Magic", 
@@ -65,7 +71,8 @@ class Library
                 released: Date.new(2015, 1, 23), 
                 genre: ["Animation"], 
                 id: 7,
-                trailer: "www.youtube.com/embed/3wv7Li2V7S8"
+                trailer: "www.youtube.com/embed/3wv7Li2V7S8",
+                earnings: 5.5
                 ),
       Movie.new(
                 title: "Selma", 
@@ -74,7 +81,8 @@ class Library
                 released: Date.new(2015, 1, 9), 
                 genre: ["Drama"], 
                 id: 8,
-                trailer: "www.youtube.com/embed/x6t7vVTxaic"
+                trailer: "www.youtube.com/embed/x6t7vVTxaic",
+                earnings: 5.4
                 ),
       Movie.new(
                 title: "Mortdecai", 
@@ -83,7 +91,8 @@ class Library
                 released: Date.new(2015, 1, 23), 
                 genre: ["Action & Adventure"], 
                 id: 9,
-                trailer: "www.youtube.com/embed/aW_sfxUnbZA"
+                trailer: "www.youtube.com/embed/aW_sfxUnbZA",
+                earnings: 4.2
                 ) ,
       Movie.new(
                 title: "Into the Woods", 
@@ -92,7 +101,8 @@ class Library
                 released: Date.new(2014, 12, 25), 
                 genre: ["Musical & Performing Arts" , "Kids & Family"], 
                 id: 10,
-                trailer: "www.youtube.com/embed/7pjy5MK1X70"
+                trailer: "www.youtube.com/embed/7pjy5MK1X70",
+                earnings: 3.9
                 )
     ]
   end
@@ -113,12 +123,19 @@ class Library
       order == "desc" ? sorted.reverse : sorted 
   end
   
+  def self.sort_by_earnings(order = "asc")
+    sorted = all.sort { |x, y| x.earnings <=> y.earnings }
+    order == "desc" ? sorted.reverse : sorted 
+  end  
+
   def self.movies_sort(category, sort_order = "asc")
     case category
     when "title"
       self.sort_by_title(sort_order)
     when "released"
       self.sort_by_release(sort_order)
+    when "earnings"
+      sort_by_earnings(sort_order)
     else
       self.all
     end

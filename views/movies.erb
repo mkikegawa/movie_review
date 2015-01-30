@@ -1,3 +1,5 @@
+require_relative"./models/library
+
 <%= erb :_nav %>
 
 <div class="row">
@@ -10,30 +12,24 @@
     <table class="table table-bordered table-striped table-hover">
       <tr >
         <th class="col-md-2 text-center">
-          <% if @category == "title" && @sort_order == "desc" %>
-            <%= '<a href="/movies?category=title&sort_order=asc">Title <span class="glyphicon glyphicon-sort-by-alphabet-alt"><span></a>' %>
-          <% elsif @category == "title" && @sort_order == "asc" %> 
-            <%= '<a href="/movies?category=title&sort_order=desc">Title <span class="glyphicon glyphicon-sort-by-alphabet"><span></a>' %>
+          <% if @category == "title" && @sort_order %>
+            <%= Library.sort_link_generator(@category, "glyphicon-sort-by-alphabet", @sort_order) %>
           <% else %> 
             <%= '<a href="/movies?category=title&sort_order=desc">Title</a>' %>  
           <% end %>
           </th>
         <th class="col-md-4 text-center">Actors</th>
         <th class="col-md-1 text-center">
-          <% if @category == "earnings" && @sort_order == "desc" %>
-            <%= '<a href="/movies?category=earnings&sort_order=asc">Earnings <span class="glyphicon glyphicon-sort-by-order-alt"><span></a>' %>
-          <% elsif @category == "earnings" && @sort_order == "asc" %> 
-            <%= '<a href="/movies?category=earnings&sort_order=desc">Earnings <span class="glyphicon glyphicon-sort-by-order"><span></a>' %>
+          <% if @category == "earnings" && @sort_order %>
+            <%= Library.sort_link_generator(@category, "glyphicon-sort-by-order", @sort_order) %>
           <% else %> 
             <%= '<a href="/movies?category=earnings&sort_order=desc">Earnings</a>' %>  
           <% end %>
         </th> 
         <th class="col-md-3 text-center">Genre</th>
         <th class="col-md-2 text-center">
-          <% if @category == "released" && @sort_order == "desc" %>
-            <%= '<a href="/movies?category=released&sort_order=asc">Released <span class="glyphicon glyphicon-sort-by-attributes-alt"><span></a>' %>
-          <% elsif @category == "released" && @sort_order == "asc" %> 
-            <%= '<a href="/movies?category=released&sort_order=desc">Released <span class="glyphicon glyphicon-sort-by-attributes"><span></a>' %>
+           <% if @category == "released" && @sort_order %>
+            <%= Library.sort_link_generator(@category, "glyphicon-sort-by-attributes", @sort_order) %>
           <% else %> 
             <%= '<a href="/movies?category=released&sort_order=desc">Released</a>' %>  
           <% end %>

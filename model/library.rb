@@ -149,5 +149,20 @@ class Library
       movie.actors_list.downcase.include?(category.downcase)
     end
   end
+  
+  def self.sort_link_generator(category, glyph, sort_order = "asc")
+    if sort_order == "desc"
+      "<a href='/movies?category=#{ category }&sort_order=asc'>#{ category.capitalize } <span class='glyphicon #{ glyph }-alt'><span></a>"
+    elsif sort_order == "asc"
+      "<a href='/movies?category=#{ category }&sort_order=desc'>#{ category.capitalize } <span class='glyphicon #{ glyph }'><span></a>"
+    else 
+      "<a href='/movies?category=title&sort_order=desc'>#{ category.capitalize }</a>"  
+    end
+  end
+
+
+
+
+
 end
 

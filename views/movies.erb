@@ -12,7 +12,8 @@
         </th> 
         <th class="col-md-3 text-center">Genre</th>
         <th class="col-md-2 text-center">
-            <%= Library.sort_link_generator("released", @category, "glyphicon-sort-by-attributes", @sort_order) %>
+            <%= Library.sort_link_generator("released", @category, "glyphicon-sort-by-attributes", 
+              @sort_order) %>
         </th>        
       </tr>
       <% @library.each do |movie| %>

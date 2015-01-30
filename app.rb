@@ -26,5 +26,11 @@ get '/movies/:id' do
 end
 
 get '/about' do
-  erb :about
+  if !params[:search]
+    erb :about
+  else
+    redirect to("/movies?search=#{ params[:search] }") 
+  end
 end
+
+

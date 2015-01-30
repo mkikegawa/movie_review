@@ -131,9 +131,9 @@ class Library
   def self.movies_sort(category, sort_order = "asc")
     case category
     when "title"
-      self.sort_by_title(sort_order)
+      sort_by_title(sort_order)
     when "released"
-      self.sort_by_release(sort_order)
+      sort_by_release(sort_order)
     when "earnings"
       sort_by_earnings(sort_order)
     else
@@ -142,7 +142,7 @@ class Library
   end
 
   def self.search(category)
-    self.all.select do |movie|
+    all.select do |movie|
       movie.genre_list.downcase.include?(category.downcase) ||
       movie.title.downcase.include?(category.downcase) ||
       movie.plot.downcase.include?(category.downcase)  ||
@@ -150,19 +150,15 @@ class Library
     end
   end
   
-  def self.sort_link_generator(category, glyph, sort_order = "asc")
-    if sort_order == "desc"
-      "<a href='/movies?category=#{ category }&sort_order=asc'>#{ category.capitalize } <span class='glyphicon #{ glyph }-alt'><span></a>"
-    elsif sort_order == "asc"
-      "<a href='/movies?category=#{ category }&sort_order=desc'>#{ category.capitalize } <span class='glyphicon #{ glyph }'><span></a>"
+  def self.sort_link_generator(name, category, glyph, sort_order = "asc")
+    if name == category && sort_order == "desc"
+      "<a href='/movies?category=#{ name }&sort_order=asc'>#{ name.capitalize } <span class='glyphicon #{ glyph }-alt'><span></a>"
+    elsif name == category && sort_order == "asc"
+      "<a href='/movies?category=#{ name }&sort_order=desc'>#{ name.capitalize } <span class='glyphicon #{ glyph }'><span></a>"
     else 
-      "<a href='/movies?category=title&sort_order=desc'>#{ category.capitalize }</a>"  
+      "<a href='/movies?category=#{ name }&sort_order=desc'>#{ name.capitalize }</a>"  
     end
   end
-
-
-
-
 
 end
 

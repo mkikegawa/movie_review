@@ -1,38 +1,18 @@
-require_relative"./models/library
-
 <%= erb :_nav %>
-
-<div class="row">
-  <div class="col-md-offset-1 col-md-10">
-    <h1>The list</h1>
-  </div>
-</div>
 <div class="row">
   <div class="col-md-offset-1 col-md-10">
     <table class="table table-bordered table-striped table-hover">
       <tr >
         <th class="col-md-2 text-center">
-          <% if @category == "title" && @sort_order %>
-            <%= Library.sort_link_generator(@category, "glyphicon-sort-by-alphabet", @sort_order) %>
-          <% else %> 
-            <%= '<a href="/movies?category=title&sort_order=desc">Title</a>' %>  
-          <% end %>
+            <%= Library.sort_link_generator("title", @category, "glyphicon-sort-by-alphabet", @sort_order) %>
           </th>
         <th class="col-md-4 text-center">Actors</th>
         <th class="col-md-1 text-center">
-          <% if @category == "earnings" && @sort_order %>
-            <%= Library.sort_link_generator(@category, "glyphicon-sort-by-order", @sort_order) %>
-          <% else %> 
-            <%= '<a href="/movies?category=earnings&sort_order=desc">Earnings</a>' %>  
-          <% end %>
+            <%= Library.sort_link_generator("earnings", @category, "glyphicon-sort-by-order", @sort_order) %>
         </th> 
         <th class="col-md-3 text-center">Genre</th>
         <th class="col-md-2 text-center">
-           <% if @category == "released" && @sort_order %>
-            <%= Library.sort_link_generator(@category, "glyphicon-sort-by-attributes", @sort_order) %>
-          <% else %> 
-            <%= '<a href="/movies?category=released&sort_order=desc">Released</a>' %>  
-          <% end %>
+            <%= Library.sort_link_generator("released", @category, "glyphicon-sort-by-attributes", @sort_order) %>
         </th>        
       </tr>
       <% @library.each do |movie| %>

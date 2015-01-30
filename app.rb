@@ -2,6 +2,7 @@ require "sinatra"
 require_relative "./model/library"
 
 get '/' do
+  @active = 'home'
   erb :home
 end
 
@@ -9,6 +10,7 @@ get '/movies' do
   @category   = params[:category]
   @sort_order = params[:sort_order]
   @search     = params[:search]
+  @active     = 'movies'
    
   if @search && @search.length > 0
     @library = Library.search(@search)
@@ -21,11 +23,13 @@ get '/movies' do
 end
 
 get '/movies/:id' do
+  @active = 'movies'
   @movie = Library.find_by_id(params[:id].to_i)
   erb :movie
 end
 
 get '/about' do
+  @active ='about'
   if !params[:search]
     erb :about
   else

@@ -1,4 +1,4 @@
-<%= erb :_nav %>
+<%= erb(:_nav, layout: false, locals: { active: @active }) %>
 
 <h1 class="text-center"><%= @movie.title %></h1>
 <div class="row">

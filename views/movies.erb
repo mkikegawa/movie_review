@@ -1,4 +1,4 @@
-<%= erb :_nav %>
+<%= erb(:_nav, layout: false, locals: { active: @active }) %>
 <div class="row">
   <div class="col-md-offset-1 col-md-10">
     <table class="table table-bordered table-striped table-hover">

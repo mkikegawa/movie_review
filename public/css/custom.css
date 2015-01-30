@@ -2,3 +2,15 @@
     float: none;
     margin: 0 auto;
 }
+
+video#bgvid {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 90%;
+  min-height: 90%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  transform: translateX(-50%) translateY(-50%);
+}

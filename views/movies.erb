@@ -21,21 +21,23 @@
         <th class="col-md-4 text-center">Actors</th>
         <th class="col-md-1 text-center">
           <% if @category == "earnings" && @sort_order == "desc" %>
-            <%= '<a href="/movies?category=earnings&sort_order=asc">' %>
+            <%= '<a href="/movies?category=earnings&sort_order=asc">Earnings <span class="glyphicon glyphicon-sort-by-order-alt"><span></a>' %>
+          <% elsif @category == "earnings" && @sort_order == "asc" %> 
+            <%= '<a href="/movies?category=earnings&sort_order=desc">Earnings <span class="glyphicon glyphicon-sort-by-order"><span></a>' %>
           <% else %> 
-            <%= '<a href="/movies?category=earnings&sort_order=desc">' %>
+            <%= '<a href="/movies?category=earnings&sort_order=desc">Earnings</a>' %>  
           <% end %>
-            Earnings</a>
-          </th> 
+        </th> 
         <th class="col-md-3 text-center">Genre</th>
         <th class="col-md-2 text-center">
           <% if @category == "released" && @sort_order == "desc" %>
-            <%= '<a href="/movies?category=released&sort_order=asc">' %>
+            <%= '<a href="/movies?category=released&sort_order=asc">Released <span class="glyphicon glyphicon-sort-by-attributes-alt"><span></a>' %>
+          <% elsif @category == "released" && @sort_order == "asc" %> 
+            <%= '<a href="/movies?category=released&sort_order=desc">Released <span class="glyphicon glyphicon-sort-by-attributes"><span></a>' %>
           <% else %> 
-            <%= '<a href="/movies?category=released&sort_order=desc">' %>
+            <%= '<a href="/movies?category=released&sort_order=desc">Released</a>' %>  
           <% end %>
-            Released</a>
-        </th>
+        </th>        
       </tr>
       <% @library.each do |movie| %>
         <tr>

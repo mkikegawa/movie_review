@@ -1,18 +1,18 @@
 <%= erb(:_nav, layout: false, locals: { active: @active }) %>
-<div class="row">
+<div class="row well">
   <div class="col-md-offset-1 col-md-10">
     <table class="table table-bordered table-striped table-hover">
       <tr >
         <th class="col-md-2 text-center">
-            <%= Library.sort_link_generator("title", @category, "glyphicon-sort-by-alphabet", @sort_order) %>
+            <%= Library.sort_link_generator("title", @search, @category, "glyphicon-sort-by-alphabet", @sort_order) %>
           </th>
         <th class="col-md-4 text-center">Actors</th>
         <th class="col-md-1 text-center">
-            <%= Library.sort_link_generator("earnings", @category, "glyphicon-sort-by-order", @sort_order) %>
+            <%= Library.sort_link_generator("earnings", @search, @category, "glyphicon-sort-by-order", @sort_order) %>
         </th> 
         <th class="col-md-3 text-center">Genre</th>
         <th class="col-md-2 text-center">
-            <%= Library.sort_link_generator("released", @category, "glyphicon-sort-by-attributes", 
+            <%= Library.sort_link_generator("released", @search, @category, "glyphicon-sort-by-attributes", 
               @sort_order) %>
         </th>        
       </tr>

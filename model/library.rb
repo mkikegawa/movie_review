@@ -113,22 +113,35 @@ class Library
     end
   end
 
-  def self.sort_by_title(order = "asc")
-      sorted = self.all.sort { |x, y| x.title <=> y.title }
+  def self.sort_by_title(library,  order = "asc")
+      sorted = library.sort { |x, y| x.title <=> y.title }
       order == "desc" ? sorted.reverse : sorted  
   end
 
-  def self.sort_by_release(order = "asc")
-      sorted = self.all.sort { |x, y| x.released <=> y.released }
+  def self.sort_by_release(library, order = "asc")
+      sorted = library.sort { |x, y| x.released <=> y.released }
       order == "desc" ? sorted.reverse : sorted 
   end
   
-  def self.sort_by_earnings(order = "asc")
-    sorted = all.sort { |x, y| x.earnings <=> y.earnings }
+  def self.sort_by_earnings(library,order = "asc")
+    sorted = library.sort { |x, y| x.earnings <=> y.earnings }
     order == "desc" ? sorted.reverse : sorted 
   end  
 
-  def self.movies_sort(category, sort_order = "asc")
+  def self.movies_search_sort(search, category, sort_order = "asc")
+    if @search && @search.length > 0
+      movies = search(category)
+    else
+      movies = all
+    end
+    if @category && @category.length > 0  
+      library = movies_sort(movies, category, sort_order)
+    else
+      library = movies
+    end
+  end
+
+  def self.movies_sort(library, category, sort_order = "asc")
     case category
     when "title"
       sort_by_title(sort_order)
@@ -149,15 +162,29 @@ class Library
       movie.actors_list.downcase.include?(category.downcase)
     end
   end
-  
-  def self.sort_link_generator(name, category, glyph, sort_order = "asc")
-    if name == category && sort_order == "desc"
-      "<a href='/movies?category=#{ name }&sort_order=asc'>#{ name.capitalize } <span class='glyphicon #{ glyph }-alt'><span></a>"
-    elsif name == category && sort_order == "asc"
-      "<a href='/movies?category=#{ name }&sort_order=desc'>#{ name.capitalize } <span class='glyphicon #{ glyph }'><span></a>"
+
+  def self.glyph_builder(sort_order, glyph)
+    if sort_order == "desc"
+      "<i class='glyphicon #{ glyph }-alt'></i>"
     else 
-      "<a href='/movies?category=#{ name }&sort_order=desc'>#{ name.capitalize }</a>"  
+      "<i class='glyphicon #{ glyph }'></i>"
     end
+  end
+
+  def self.sort_order_link(sort_order)
+    if sort_order == "desc"
+      "asc"
+    else
+      "desc"
+    end
+  end
+  
+  def self.sort_link_generator(name, search, category, glyph, sort_order = "asc")
+    link = "<a href='/movies?" 
+    link << "search=#{ search }&" if search && search.length > 0
+    link << "category=#{ name }&sort_order=#{ sort_order_link(sort_order) }'>#{ name.capitalize } "    
+    link <<"#{ glyph_builder(sort_order, glyph) }" if category == name 
+    link << "</a>"
   end
 
 end

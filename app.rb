@@ -12,10 +12,8 @@ get '/movies' do
   @search     = params[:search]
   @active     = 'movies'
    
-  if @search && @search.length > 0
-    @library = Library.search(@search)
-  elsif @category && @category.length > 0 
-    @library  = Library.movies_sort(@category, @sort_order)
+  if @category && @category.length > 0 || @search && @search.length > 0
+    @library  = Library.movies_search_sort(@search, @category, @sort_order)
   else
     @library  = Library.all
   end

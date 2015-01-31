@@ -129,28 +129,28 @@ class Library
   end  
 
   def self.movies_search_sort(search, category, sort_order = "asc")
-    if @search && @search.length > 0
+    if search && search.length > 0
       movies = search(category)
     else
       movies = all
     end
-    if @category && @category.length > 0  
+    if category && category.length > 0  
       library = movies_sort(movies, category, sort_order)
     else
       library = movies
     end
   end
 
-  def self.movies_sort(library, category, sort_order = "asc")
+  def self.movies_sort(movies, category, sort_order = "asc")
     case category
     when "title"
-      sort_by_title(sort_order)
+      sort_by_title(movies, sort_order)
     when "released"
-      sort_by_release(sort_order)
+      sort_by_release(movies, sort_order)
     when "earnings"
-      sort_by_earnings(sort_order)
+      sort_by_earnings(movies, sort_order)
     else
-      self.all
+      all
     end
   end
 

@@ -7,12 +7,12 @@ get '/' do
 end
 
 get '/movies' do
-  @category   = params[:category]
-  @sort_order = params[:sort_order]
+  @category   = params[:category] || "title"
+  @sort_order = params[:sort_order] || "asc"
   @search     = params[:search]
   @active     = 'movies'
    
-  if @category && @category.length > 0 || @search && @search.length > 0
+  if @category || @search 
     @library  = Library.movies_search_sort(@search, @category, @sort_order)
   else
     @library  = Library.all
@@ -28,7 +28,7 @@ end
 
 get '/about' do
   @active ='about'
-  if !params[:search]
+  if !@search
     erb :about
   else
     redirect to("/movies?search=#{ params[:search] }") 

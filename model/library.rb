@@ -1,3 +1,4 @@
+require 'pry'
 require_relative "./movie"
 
 class Library
@@ -130,7 +131,7 @@ class Library
 
   def self.movies_search_sort(search, category, sort_order = "asc")
     if search && search.length > 0
-      movies = search(category)
+      movies = search(search) 
     else
       movies = all
     end
@@ -154,12 +155,12 @@ class Library
     end
   end
 
-  def self.search(category)
+  def self.search(item)
     all.select do |movie|
-      movie.genre_list.downcase.include?(category.downcase) ||
-      movie.title.downcase.include?(category.downcase) ||
-      movie.plot.downcase.include?(category.downcase)  ||
-      movie.actors_list.downcase.include?(category.downcase)
+      movie.genre_list.downcase.include?(item.downcase) ||
+      movie.title.downcase.include?(item.downcase)      ||
+      movie.plot.downcase.include?(item.downcase)       ||
+      movie.actors_list.downcase.include?(item.downcase)
     end
   end
 

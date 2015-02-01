@@ -22,16 +22,22 @@ end
 
 get '/movies/:id' do
   @active = 'movies'
-  @movie = Library.find_by_id(params[:id].to_i)
-  erb :movie
+  @search     = params[:search]
+  if !@search
+    @movie = Library.find_by_id(params[:id].to_i)
+    erb :movie
+  else 
+    redirect to("/movies?search=#{ @search }") 
+  end
 end
 
 get '/about' do
   @active ='about'
+  @search     = params[:search]
   if !@search
     erb :about
   else
-    redirect to("/movies?search=#{ params[:search] }") 
+    redirect to("/movies?search=#{ @search }") 
   end
 end
 

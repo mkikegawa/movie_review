@@ -1,33 +1,43 @@
 <%= erb(:_nav, layout: false, locals: { active: @active }) %>
 <div class="row well">
   <div class="col-md-offset-1 col-md-10">
-    <table class="table table-bordered table-striped table-hover">
-      <tr >
-        <th class="col-md-2 text-center">
-            <%= Library.sort_link_generator("title", @search, @category, "glyphicon-sort-by-alphabet", @sort_order) %>
-          </th>
-        <th class="col-md-4 text-center">Actors</th>
-        <th class="col-md-1 text-center">
-            <%= Library.sort_link_generator("earnings", @search, @category, "glyphicon-sort-by-order", @sort_order) %>
-        </th> 
-        <th class="col-md-3 text-center">Genre</th>
-        <th class="col-md-2 text-center">
-            <%= Library.sort_link_generator("released", @search, @category, "glyphicon-sort-by-attributes", 
-              @sort_order) %>
-        </th>        
-      </tr>
-      <% @library.each do |movie| %>
-        <tr>
-          <td class="text-left"><a href="movies/<%= movie.id %>"><%= movie.title %></a></td>
-          <td class="text-left"><a href="movies/<%= movie.id %>"><%= movie.actors_list %></a></td>
-          <td class="text-center"><a href="movies/<%= movie.id %>">$<%= movie.earnings %>M</a></td>
-          <td class="text-left"><a href="movies/<%= movie.id %>"><%= movie.genre_list %></a></td>
-          <td class="text-center"><a href="movies/<%= movie.id %>"><%= movie.released %></a></td>
-        </tr>
-      <% end %>
-    </table>
-    <p class="text-right">
-       * Information source -- <a href="http://www.rottentomatoes.com/">Rottentomatos.com</a>
-    </p>
+   <% if @library.empty? %>
+    <%= '<table class="table table-bordered table-striped">' %>
+      <%= '<tr>' %>
+        <%= "<td class='col-xs-12 text-center'>#{ @search } is not found.</td>" %> 
+      <%= '</tr>' %>
+      <%= '<tr>' %>
+        <%= "<td class='col-xs-12 text-center'>Please enter New Search term or Press Reset</td>" %>
+      <%= '</tr>' %>
+    <% else %>
+      <table class="table table-bordered table-striped table-hover">
+        <tr >
+          <th class="col-md-2 text-center">
+              <%= Library.sort_link_generator("title", @search, @category, "glyphicon-sort-by-alphabet", @sort_order) %>
+            </th>
+          <th class="col-md-4 text-center">Actors</th>
+          <th class="col-md-1 text-center">
+              <%= Library.sort_link_generator("earnings", @search, @category, "glyphicon-sort-by-order", @sort_order) %>
+          </th> 
+          <th class="col-md-3 text-center">Genre</th>
+          <th class="col-md-2 text-center">
+              <%= Library.sort_link_generator("released", @search, @category, "glyphicon-sort-by-attributes", 
+                @sort_order) %>
+          </th>        
+        </tr>   
+        <% @library.each do |movie| %>
+          <tr>
+            <td class="text-left"><a href="movies/<%= movie.id %>"><%= movie.title %></a></td>
+            <td class="text-left"><a href="movies/<%= movie.id %>"><%= movie.actors_list %></a></td>
+            <td class="text-center"><a href="movies/<%= movie.id %>">$<%= movie.earnings %>M</a></td>
+            <td class="text-left"><a href="movies/<%= movie.id %>"><%= movie.genre_list %></a></td>
+            <td class="text-center"><a href="movies/<%= movie.id %>"><%= movie.released %></a></td>
+          </tr>
+        <% end %>
+      </table>
+      <p class="text-right">
+         * Information source -- <a href="http://www.rottentomatoes.com/">Rottentomatos.com</a>
+      </p>
+    <% end %>
   </div>
-</div>
+</div

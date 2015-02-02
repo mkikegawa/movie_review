@@ -1,6 +1,11 @@
+# This class also:
+# - actors_list -> joins the array of actor items used for output to
+#     screen & searching
+# - genre_list  -> joins the array of genre items used for output to
+#     screen & searching
 class Movie
-
-  attr_reader :title, :plot, :actors, :released, :genre, :id, :trailer, :earnings
+  attr_reader :title, :plot, :actors, :released, :genre, :id, :trailer,
+              :earnings
   def initialize(args)
     @title    = args[:title]
     @plot     = args[:plot]
@@ -13,15 +18,16 @@ class Movie
   end
 
   def to_s
-    "Title: #{ @title }, Plot: #{ @plot }, Actors: #{ @actors }, \ Earnings: #{earnings}, Released: #{ @released }, \ 
-      Category: #{ @category}"
+    "Title: #{ @title }, Plot: #{ @plot }, Actors: #{ @actors }, "\
+    "Earnings: #{earnings}, Released: #{ @released }, "\
+    "Category: #{ @category}"
   end
 
   def actors_list
-     @actors.length < 2 ? @actors.join("") : @actors.join(", ") 
+    @actors.length < 2 ? @actors.join("") : @actors.join(", ")
   end
 
   def genre_list
-     @genre.length < 2 ? @genre.join("") : @genre.join(", ")  
+    @genre.length < 2 ? @genre.join("") : @genre.join(", ")
   end
 end
